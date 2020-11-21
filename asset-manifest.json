@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/find-the-country/static/css/main.e6734266.chunk.css",
+    "main.js": "/find-the-country/static/js/main.6aed4ffd.chunk.js",
+    "main.js.map": "/find-the-country/static/js/main.6aed4ffd.chunk.js.map",
+    "runtime-main.js": "/find-the-country/static/js/runtime-main.2091fe07.js",
+    "runtime-main.js.map": "/find-the-country/static/js/runtime-main.2091fe07.js.map",
+    "static/css/2.6d7c6ada.chunk.css": "/find-the-country/static/css/2.6d7c6ada.chunk.css",
+    "static/js/2.1a734736.chunk.js": "/find-the-country/static/js/2.1a734736.chunk.js",
+    "static/js/2.1a734736.chunk.js.map": "/find-the-country/static/js/2.1a734736.chunk.js.map",
+    "static/js/3.050c1b93.chunk.js": "/find-the-country/static/js/3.050c1b93.chunk.js",
+    "static/js/3.050c1b93.chunk.js.map": "/find-the-country/static/js/3.050c1b93.chunk.js.map",
+    "index.html": "/find-the-country/index.html",
+    "static/css/2.6d7c6ada.chunk.css.map": "/find-the-country/static/css/2.6d7c6ada.chunk.css.map",
+    "static/css/main.e6734266.chunk.css.map": "/find-the-country/static/css/main.e6734266.chunk.css.map",
+    "static/js/2.1a734736.chunk.js.LICENSE.txt": "/find-the-country/static/js/2.1a734736.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2091fe07.js",
+    "static/css/2.6d7c6ada.chunk.css",
+    "static/js/2.1a734736.chunk.js",
+    "static/css/main.e6734266.chunk.css",
+    "static/js/main.6aed4ffd.chunk.js"
+  ]
+}
