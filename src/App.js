@@ -108,6 +108,13 @@ class App extends React.Component {
         "info",
         3500
       );
+    } else if (type === "notEnoughCoins") {
+      this.makeNotification(
+        "Error!",
+        "You don't have enough coins to use this hint!",
+        "danger",
+        3500
+      );
     }
   };
 
@@ -138,6 +145,8 @@ class App extends React.Component {
           currentContinent: currentCountryObj.region,
           playerCoins: this.state.playerCoins - 1,
         });
+      } else {
+        this.callNotification("notEnoughCoins");
       }
     } else if (type === "bordering") {
       if (playerCoins >= 4) {
@@ -151,6 +160,8 @@ class App extends React.Component {
         } else {
           this.setState({ currentBordering: "No bordering countries." });
         }
+      } else {
+        this.callNotification("notEnoughCoins");
       }
     }
   }
