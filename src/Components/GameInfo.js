@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -6,27 +5,34 @@ import {
   notEnoughCoinsNotif,
   noBorderingNotif,
 } from "../helpers/notifications";
+import { connect } from "react-redux";
+import { deductCoins, completeHint } from "../state/action/index";
+import { getCountryName } from "../helpers/general";
 
-function GameInfo({ country, coins, setCoins, findBordering }) {
-  const [continentHint, setContinentHint] = useState(false);
-  const [borderHint, setborderHint] = useState(false);
-
+function GameInfo({
+  countries,
+  country,
+  coins,
+  deductCoins,
+  hints,
+  completeHint,
+}) {
   const hasBorderingCountries = country.borders && country.borders.length > 0;
 
   const getHint = (type) => {
     if (type === "continent") {
       if (coins >= 1) {
-        setContinentHint(true);
-        setCoins((prevCoins) => prevCoins - 1);
+        completeHint("continent");
+        deductCoins(1);
         usedHintNotif("Continent", 1);
       } else {
         notEnoughCoinsNotif();
       }
     } else if (type === "bordering") {
       if (coins >= 4) {
-        setborderHint(true);
+        completeHint("bordering");
         if (hasBorderingCountries) {
-          setCoins((prevCoins) => prevCoins - 4);
+          deductCoins(4);
           usedHintNotif("Bordering Countries", 4);
         } else {
           noBorderingNotif();
@@ -36,6 +42,11 @@ function GameInfo({ country, coins, setCoins, findBordering }) {
       }
     }
   };
+
+  const findBordering = (cca3) => {
+    return getCountryName(countries, cca3);
+  };
+
   return (
     <>
       <ToastContainer
@@ -55,21 +66,20 @@ function GameInfo({ country, coins, setCoins, findBordering }) {
               <div className="game-country game-div">
                 Find: <span>{country.name.common}</span>
               </div>
-              {continentHint && (
+              {hints.continent && (
                 <div className="game-continent game-div">
                   Continent: <span>{country.continents.join(", ")}</span>
                 </div>
               )}
-              {borderHint && hasBorderingCountries && (
+              {hints.bordering && hasBorderingCountries && (
                 <div className="game-bordering game-div">
                   Bordering Countries:{" "}
                   <span>
-                    {country.borders.map(
-                      (currCountry, i) =>
-                        `${findBordering(currCountry)}${
-                          country.borders.length - 1 === i ? "" : ", "
-                        }`
-                    )}
+                    {country.borders.map((currCountry, i) => {
+                      return `${findBordering(currCountry)}${
+                        country.borders.length - 1 === i ? "" : ", "
+                      }`;
+                    })}
                   </span>
                 </div>
               )}
@@ -81,7 +91,7 @@ function GameInfo({ country, coins, setCoins, findBordering }) {
               <div className="game-hint">
                 <div
                   className={
-                    "hint-cont hint-btn " + (continentHint ? "used" : "avail")
+                    "hint-cont hint-btn " + (hints.continent ? "used" : "avail")
                   }
                   onClick={() => getHint("continent")}
                 >
@@ -90,7 +100,8 @@ function GameInfo({ country, coins, setCoins, findBordering }) {
 
                 <div
                   className={
-                    "hint-border hint-btn " + (borderHint ? "used" : "avail")
+                    "hint-border hint-btn " +
+                    (hints.bordering ? "used" : "avail")
                   }
                   onClick={() => getHint("bordering")}
                 >
@@ -105,4 +116,16 @@ function GameInfo({ country, coins, setCoins, findBordering }) {
   );
 }
 
-export default GameInfo;
+const mapStateToProps = (state) => ({
+  coins: state.coins,
+  hints: state.hints,
+  countries: state.countries,
+  country: state.currentCountry,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  deductCoins: (amount) => dispatch(deductCoins(amount)),
+  completeHint: (hintType) => dispatch(completeHint(hintType)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameInfo);

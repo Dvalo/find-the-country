@@ -1,23 +1,24 @@
-import React from "react";
 import { correctGuessNotif, wrongGuessNotif } from "../helpers/notifications";
 import { VectorMap } from "@react-jvectormap/core";
 import worldMill from "@react-jvectormap/world/dist/worldMill.json";
+import { connect } from "react-redux";
+import { addCoins, deductCoins } from "../state/action/index";
 
 import "react-toastify/dist/ReactToastify.css";
 
-function WorldMapDisplay({ country, newRound, coins, setCoins }) {
+function WorldMapDisplay({ country, newRound, addCoins, deductCoins }) {
   const handleClick = (e, countryCode) => {
     if (countryCode === country.cca2) {
       if (country.population < 10000000 && country.area < 210000.0) {
         correctGuessNotif("hard difficulty", 10);
-        setCoins((prevCoins) => prevCoins + 10);
+        addCoins(10);
       } else {
         correctGuessNotif("easy difficulty", 3);
-        setCoins((prevCoins) => prevCoins + 3);
+        addCoins(3);
       }
     } else {
       wrongGuessNotif();
-      setCoins((prevCoins) => prevCoins - 1);
+      deductCoins(1);
     }
     newRound();
   };
@@ -52,4 +53,14 @@ function WorldMapDisplay({ country, newRound, coins, setCoins }) {
   );
 }
 
-export default WorldMapDisplay;
+const mapStateToProps = (state) => ({
+  coins: state.coins,
+  country: state.currentCountry,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addCoins: (amount) => dispatch(addCoins(amount)),
+  deductCoins: (amount) => dispatch(deductCoins(amount)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(WorldMapDisplay);
