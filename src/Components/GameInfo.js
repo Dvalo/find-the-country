@@ -11,6 +11,8 @@ function GameInfo({ country, coins, setCoins, findBordering }) {
   const [continentHint, setContinentHint] = useState(false);
   const [borderHint, setborderHint] = useState(false);
 
+  const hasBorderingCountries = country.borders && country.borders.length > 0;
+
   const getHint = (type) => {
     if (type === "continent") {
       if (coins >= 1) {
@@ -23,8 +25,7 @@ function GameInfo({ country, coins, setCoins, findBordering }) {
     } else if (type === "bordering") {
       if (coins >= 4) {
         setborderHint(true);
-        // TODO error proof if country has no borders
-        if (country.borders.length > 0) {
+        if (hasBorderingCountries) {
           setCoins((prevCoins) => prevCoins - 4);
           usedHintNotif("Bordering Countries", 4);
         } else {
@@ -59,7 +60,7 @@ function GameInfo({ country, coins, setCoins, findBordering }) {
                   Continent: <span>{country.continents.join(", ")}</span>
                 </div>
               )}
-              {borderHint && (
+              {borderHint && hasBorderingCountries && (
                 <div className="game-bordering game-div">
                   Bordering Countries:{" "}
                   <span>

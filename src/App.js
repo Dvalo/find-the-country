@@ -25,7 +25,6 @@ function App() {
   useEffect(() => {
     if (countries.length > 0) {
       getRandomCountry();
-      console.log(countries, " ALL COUNTRIES");
     }
   }, [countries]);
 
@@ -51,7 +50,7 @@ function App() {
       <GameInfo
         country={currentCountry}
         coins={coins}
-        updateCoins={setCoins}
+        setCoins={setCoins}
         findBordering={findBordering}
       />
       <WorldMapDisplay

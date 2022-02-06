@@ -22,34 +22,32 @@ function WorldMapDisplay({ country, newRound, coins, setCoins }) {
   };
 
   return (
-    <>
-      <div className="map-wrapper">
-        <VectorMap
-          map="world_mill"
-          backgroundColor="transparent"
-          zoomOnScroll={true}
-          containerStyle={{
-            width: "95%",
-            margin: "0 auto",
-            height: "80vh",
-            border: "5px solid #131318",
-          }}
-          onRegionTipShow={(e) => e.preventDefault()}
-          onRegionClick={handleClick}
-          containerClassName="map"
-          regionStyle={{
-            initial: {
-              fill: "#222230",
-              "fill-opacity": 1,
-            },
-            hover: {
-              "fill-opacity": 0.7,
-              cursor: "cursor",
-            },
-          }}
-        />
-      </div>
-    </>
+    <div className="map-wrapper">
+      <VectorMap
+        map="world_mill"
+        backgroundColor="transparent"
+        zoomOnScroll={true}
+        containerStyle={{
+          width: "95%",
+          margin: "0 auto",
+          height: "85vh",
+          border: "5px solid #131318",
+        }}
+        onRegionTipShow={(e) => e.preventDefault()}
+        onRegionClick={handleClick}
+        containerClassName="map"
+        regionStyle={{
+          initial: {
+            fill: "#222230",
+            "fill-opacity": 1,
+          },
+          hover: {
+            "fill-opacity": 0.7,
+            cursor: "cursor",
+          },
+        }}
+      />
+    </div>
   );
 }
 
