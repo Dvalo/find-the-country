@@ -1,5 +1,5 @@
-.App {
-  text-align: center;
+.jvectormap-container {
+  cursor: grab;
 }
 
 .map-wrapper {
@@ -15,7 +15,7 @@ path.jvectormap-region {
   background-color: #1c1d23;
   color: #bebdc1;
   padding: 10px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 .game-information-wrapper {
   width: 80%;
