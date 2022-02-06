@@ -53,12 +53,14 @@ function App() {
         setCoins={setCoins}
         findBordering={findBordering}
       />
-      <WorldMapDisplay
-        country={currentCountry}
-        newRound={newRound}
-        coins={coins}
-        setCoins={setCoins}
-      />
+      {Object.keys(currentCountry).length > 0 && (
+        <WorldMapDisplay
+          country={currentCountry}
+          newRound={newRound}
+          coins={coins}
+          setCoins={setCoins}
+        />
+      )}
     </>
   );
 }

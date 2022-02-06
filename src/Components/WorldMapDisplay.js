@@ -1,8 +1,9 @@
 import React from "react";
-import "react-toastify/dist/ReactToastify.css";
 import { correctGuessNotif, wrongGuessNotif } from "../helpers/notifications";
+import { VectorMap } from "@react-jvectormap/core";
+import worldMill from "@react-jvectormap/world/dist/worldMill.json";
 
-import { VectorMap } from "react-jvectormap";
+import "react-toastify/dist/ReactToastify.css";
 
 function WorldMapDisplay({ country, newRound, coins, setCoins }) {
   const handleClick = (e, countryCode) => {
@@ -24,10 +25,10 @@ function WorldMapDisplay({ country, newRound, coins, setCoins }) {
   return (
     <div className="map-wrapper">
       <VectorMap
-        map="world_mill"
+        map={worldMill}
         backgroundColor="transparent"
         zoomOnScroll={true}
-        containerStyle={{
+        style={{
           width: "95%",
           margin: "0 auto",
           height: "85vh",
