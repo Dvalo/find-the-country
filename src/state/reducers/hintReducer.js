@@ -1,6 +1,8 @@
 const initialState = {
   continent: false,
   bordering: false,
+  capital: false,
+  flag: false,
 };
 
 const hintReducer = (state = initialState, action) => {
