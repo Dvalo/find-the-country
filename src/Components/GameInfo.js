@@ -8,6 +8,9 @@ import {
 import { connect } from "react-redux";
 import { deductCoins, completeHint } from "../state/action/index";
 import { getCountryName } from "../helpers/general";
+import HintBtn from "./HintBtn";
+import HintDisplay from "./HintDisplay";
+import hintsConfig from "../config/hints.constant";
 
 function GameInfo({
   countries,
@@ -18,34 +21,47 @@ function GameInfo({
   completeHint,
 }) {
   const hasBorderingCountries = country.borders && country.borders.length > 0;
+  const hasCapital = country.capital && country.capital.length > 0;
+  const hasContinents = country.continents && country.continents.length > 0;
 
-  const getHint = (type) => {
-    if (type === "continent") {
-      if (coins >= 1) {
-        completeHint("continent");
-        deductCoins(1);
-        usedHintNotif("Continent", 1);
-      } else {
-        notEnoughCoinsNotif();
-      }
-    } else if (type === "bordering") {
-      if (coins >= 4) {
-        completeHint("bordering");
-        if (hasBorderingCountries) {
-          deductCoins(4);
-          usedHintNotif("Bordering Countries", 4);
-        } else {
+  const flag = country.flags.svg || country.flags.png;
+  const continents = hasContinents ? country.continents.join(", ") : null;
+  const capital = hasCapital ? country.capital.join(", ") : null;
+  const borderingCountries = hasBorderingCountries
+    ? country.borders
+        .map((currCountry) => findBordering(currCountry))
+        .join(", ")
+    : null;
+
+  function getHint(hintType) {
+    const { continent, bordering, capital, flag } = hintsConfig;
+    if (
+      hintType === continent.type ||
+      hintType === bordering.type ||
+      hintType === capital.type ||
+      hintType === flag.type
+    ) {
+      if (coins >= hintsConfig[hintType].cost) {
+        if (hintType === bordering.type && !hasBorderingCountries) {
+          completeHint(hintsConfig[hintType].type);
           noBorderingNotif();
+          return;
         }
-      } else {
-        notEnoughCoinsNotif();
+        completeHint(hintsConfig[hintType].type);
+        deductCoins(hintsConfig[hintType].cost);
+        usedHintNotif(
+          `'${hintsConfig[hintType].btnText}'`,
+          hintsConfig[hintType].cost
+        );
+        return;
       }
+      notEnoughCoinsNotif();
     }
-  };
+  }
 
-  const findBordering = (cca3) => {
+  function findBordering(cca3) {
     return getCountryName(countries, cca3);
-  };
+  }
 
   return (
     <>
@@ -66,22 +82,29 @@ function GameInfo({
               <div className="game-country game-div">
                 Find: <span>{country.name.common}</span>
               </div>
+              {hints.flag && (
+                <HintDisplay hint={flag} type={hintsConfig.flag.type} />
+              )}
               {hints.continent && (
-                <div className="game-continent game-div">
-                  Continent: <span>{country.continents.join(", ")}</span>
-                </div>
+                <HintDisplay
+                  text={hintsConfig.continent.displayText}
+                  hint={continents}
+                  type={hintsConfig.continent.type}
+                />
+              )}
+              {hints.capital && (
+                <HintDisplay
+                  text={hintsConfig.capital.displayText}
+                  hint={capital}
+                  type={hintsConfig.capital.type}
+                />
               )}
               {hints.bordering && hasBorderingCountries && (
-                <div className="game-bordering game-div">
-                  Bordering Countries:{" "}
-                  <span>
-                    {country.borders.map((currCountry, i) => {
-                      return `${findBordering(currCountry)}${
-                        country.borders.length - 1 === i ? "" : ", "
-                      }`;
-                    })}
-                  </span>
-                </div>
+                <HintDisplay
+                  text={hintsConfig.bordering.displayText}
+                  hint={borderingCountries}
+                  type={hintsConfig.bordering.type}
+                />
               )}
             </div>
             <div className="game-details">
@@ -89,24 +112,30 @@ function GameInfo({
                 Coins: <span>{coins}</span>
               </div>
               <div className="game-hint">
-                <div
-                  className={
-                    "hint-cont hint-btn " + (hints.continent ? "used" : "avail")
-                  }
-                  onClick={() => getHint("continent")}
-                >
-                  Get Continent
-                </div>
-
-                <div
-                  className={
-                    "hint-border hint-btn " +
-                    (hints.bordering ? "used" : "avail")
-                  }
-                  onClick={() => getHint("bordering")}
-                >
-                  Get bordering countries
-                </div>
+                <HintBtn
+                  text={hintsConfig.continent.btnText}
+                  used={hints.continent}
+                  getHint={getHint}
+                  type={hintsConfig.continent.type}
+                />
+                <HintBtn
+                  text={hintsConfig.bordering.btnText}
+                  used={hints.bordering}
+                  getHint={getHint}
+                  type={hintsConfig.bordering.type}
+                />
+                <HintBtn
+                  text={hintsConfig.capital.btnText}
+                  used={hints.capital}
+                  getHint={getHint}
+                  type={hintsConfig.capital.type}
+                />
+                <HintBtn
+                  text={hintsConfig.flag.btnText}
+                  used={hints.flag}
+                  getHint={getHint}
+                  type={hintsConfig.flag.type}
+                />
               </div>
             </div>
           </div>
