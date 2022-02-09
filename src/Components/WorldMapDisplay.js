@@ -30,10 +30,8 @@ function WorldMapDisplay({ country, newRound, addCoins, deductCoins }) {
         backgroundColor="transparent"
         zoomOnScroll={true}
         style={{
-          width: "95%",
-          margin: "0 auto",
-          height: "85vh",
-          border: "5px solid #131318",
+          width: "100%",
+          height: "calc(100vh - 135px)",
         }}
         onRegionTipShow={(e) => e.preventDefault()}
         onRegionClick={handleClick}

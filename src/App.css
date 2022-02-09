@@ -15,7 +15,7 @@ path.jvectormap-region {
   background-color: #1c1d23;
   color: #bebdc1;
   padding: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .game-information-wrapper {
   width: 80%;
@@ -49,6 +49,9 @@ path.jvectormap-region {
 }
 .game-hint {
   margin-left: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 8px;
 }
 .game-coins span {
   color: #4dc99b;
@@ -56,8 +59,7 @@ path.jvectormap-region {
 .hint-btn {
   cursor: pointer;
   background: #2c2e37;
-  padding: 5px;
-  margin: 5px;
+  padding: 8px;
 }
 .used {
   pointer-events: none;
