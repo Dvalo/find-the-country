@@ -28,7 +28,7 @@ function App({
 
   const getRandomCountry = () => {
     let randCountry = countries[Math.floor(Math.random() * countries.length)];
-    while (randCountry.area < 14500.0) {
+    while (randCountry.area < 14500.0 && randCountry.population < 1000000) {
       randCountry = countries[Math.floor(Math.random() * countries.length)];
     }
     setCurrentCountry(randCountry);
