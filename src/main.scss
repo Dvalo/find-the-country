@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&display=swap');
+html, body {
+  height: 100%;
+}
+body {
+  background-color: #6060af;
+  margin: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.jvectormap-container {
+  cursor: grab;
+
+  path.jvectormap-region {
+    cursor: pointer;
+  }
+}
+
+.game-header {
+  background-color: #1c1d23;
+  color: #bebdc1;
+  padding: 10px;
+  margin-bottom: 20px;
+
+  .gh-wrapper {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .game-block-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  .go-block {
+    margin-right: 25px;
+  }
+  .go-block span, .game-details span {
+    font-weight: bold;
+    display: block;
+  }
+  .go-block {
+    &--country span {
+      color: #ffdb8f;
+    }
+    &--continent span {
+      color: #8697ea;
+    }
+    &--bordering span {
+      color: #ee8b74;
+    }
+    &--capital span {
+      color: #3db5c5;
+    }
+  }
+  .gd-coins span {
+    color: #4dc99b;
+  }
+  .gd-hint {
+    margin-left: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 8px;
+  }
+  .hint-btn {
+    cursor: pointer;
+    background: #2c2e37;
+    padding: 8px;
+    transition: 0.15s ease-in-out;
+
+    &:hover {
+      background: #414452;
+    }
+
+    &.used {
+      pointer-events: none;
+      opacity: 0.3;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .gh-wrapper {
+    flex-direction: column;
+    align-items: flex-start !important;
+    width: 100% !important;
+  }
+  .game-details {
+    justify-content: space-between;
+    margin-top: 25px;
+    width: 100%;
+  }
+}

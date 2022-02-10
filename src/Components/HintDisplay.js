@@ -1,6 +1,6 @@
 function HintDisplay({ text, hint, type }) {
   return (
-    <div className={`game-div game-${type}`}>
+    <div className={`go-block go-block--${type}`}>
       {type !== "flag" ? (
         <>
           {text}: <span>{hint}</span>

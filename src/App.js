@@ -9,8 +9,6 @@ import {
   setCurrentCountry,
 } from "./state/action/index";
 
-import "./App.css";
-
 function App({
   countries,
   resetHints,

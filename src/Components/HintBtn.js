@@ -1,7 +1,7 @@
 function HintBtn({ text, used, getHint, type }) {
   return (
     <div
-      className={"hint-border hint-btn " + (used ? "used" : "avail")}
+      className={`hint-btn hint-${type} ` + (used ? "used" : "avail")}
       onClick={() => getHint(type)}
     >
       {text}

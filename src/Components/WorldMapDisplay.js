@@ -24,7 +24,7 @@ function WorldMapDisplay({ country, newRound, addCoins, deductCoins }) {
   };
 
   return (
-    <div className="map-wrapper">
+    <div className="game-map">
       <VectorMap
         map={worldMill}
         backgroundColor="transparent"

@@ -76,10 +76,10 @@ function GameInfo({
         pauseOnHover
       />
       {Object.keys(country).length > 0 && (
-        <div className="game-information">
-          <div className="game-information-wrapper">
-            <div className="game-objective">
-              <div className="game-country game-div">
+        <header className="game-header">
+          <div className="gh-wrapper">
+            <div className="game-block-wrapper game-objective">
+              <div className="go-block go-block--country">
                 Find: <span>{country.name.common}</span>
               </div>
               {hints.flag && (
@@ -107,11 +107,11 @@ function GameInfo({
                 />
               )}
             </div>
-            <div className="game-details">
-              <div className="game-coins">
+            <div className="game-block-wrapper game-details">
+              <div className="gd-coins">
                 Coins: <span>{coins}</span>
               </div>
-              <div className="game-hint">
+              <div className="gd-hint">
                 <HintBtn
                   text={hintsConfig.continent.btnText}
                   used={hints.continent}
@@ -139,7 +139,7 @@ function GameInfo({
               </div>
             </div>
           </div>
-        </div>
+        </header>
       )}
     </>
   );
