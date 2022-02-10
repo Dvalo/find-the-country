@@ -8,6 +8,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 function WorldMapDisplay({ country, newRound, addCoins, deductCoins }) {
   const handleClick = (e, countryCode) => {
+    if (countryCode === "94c") {
+      countryCode = "US";
+    }
     if (countryCode === country.cca2) {
       if (country.population < 10000000 && country.area < 210000.0) {
         correctGuessNotif("hard difficulty", 10);
