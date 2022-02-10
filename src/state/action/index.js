@@ -1,6 +1,7 @@
 import { addCoins, deductCoins } from "./coinActions";
 import { completeHint, resetHints } from "./hintActions";
-import { setAllCountries, setCurrentCountry } from "./countryActions";
+import { setAllCountries } from "./allCountryActions";
+import { setCurrentCountry } from "./currentCountryActions";
 
 export {
   addCoins,

@@ -1,6 +1,4 @@
-import dummy from "../../dummy";
-
-const allCountriesReducer = (state = dummy, action) => {
+const allCountriesReducer = (state = [], action) => {
   switch (action.type) {
     case "SET_ALL_COUNTRIES":
       return action.payload;

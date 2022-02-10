@@ -1,5 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
-// import axios from "axios";
 import WorldMapDisplay from "./components/WorldMapDisplay";
 import GameInfo from "./components/GameInfo";
 import { connect } from "react-redux";
@@ -16,14 +16,9 @@ function App({
   currentCountry,
   setCurrentCountry,
 }) {
-  // useEffect(() => {
-  //   axios
-  //     .get("https://restcountries.com/v3.1/all")
-  //     .then((response) => {
-  //       setAllCountries(response.data);
-  //     })
-  //     .catch((error) => console.log(error));
-  // }, []);
+  useEffect(() => {
+    setAllCountries();
+  }, []);
 
   useEffect(() => {
     if (countries.length > 0) {
